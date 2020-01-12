@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FoodBit</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_location">Your Location</string>
+    <string name="location">Location</string>
+    <string name="refresh">Refresh</string>
+    <string name="restaurant_detail_image">Restaurant Detail Image</string>
+    <string name="cuisines">Cuisines</string>
+    <string name="pictures">Pictures</string>
+    <string name="select">Select</string>
+    <string name="cancel">Cancel</string>
+</resources>

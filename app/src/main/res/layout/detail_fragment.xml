@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="restaurant"
+                type="com.example.foodBit.database.Restaurant"/>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/draw_insets_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MergeRootFrame">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_layout_app_bar_height"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:expandedTitleMargin="@dimen/activity_horizontal_margin"
+                    app:expandedTitleMarginBottom="@dimen/expanded_toolbar_title_margin_bottom"
+                    app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+                <FrameLayout
+                        android:id="@+id/photo_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_collapseMode="parallax"
+                        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+                    <ImageView
+                            android:id="@+id/photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/restaurant_detail_image"
+                            android:scaleType="centerCrop"
+                            app:imageUrl="@{restaurant.thumb}"
+                            app:layout_collapseMode="parallax"/>
+
+                    <View android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:background="@drawable/photo_background_protection"/>
+
+                </FrameLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/detail_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:contentInsetStart="@dimen/activity_horizontal_margin"
+                        app:layout_collapseMode="parallax"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:layout_marginTop="@dimen/material_layout_app_bar_space_negative"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/container_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_vertical_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/padding_mid">
+
+                        <TextView
+                                android:id="@+id/title"
+                                style="@style/TextAppearance.AppCompat.Title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/activity_margin_small"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:textColor="@color/primary_text"
+                                android:maxLines="2"
+                                android:text="@{restaurant.name}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/rating"
+                                app:layout_constraintHorizontal_chainStyle="spread"
+                                tools:text="@string/app_name" android:layout_marginLeft="@dimen/activity_margin_small"/>
+
+                        <TextView
+                                android:id="@+id/rating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:text="@{restaurant.userAggregateRating}"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center"
+                                android:layout_gravity="end|bottom"
+                                android:drawableRight="@drawable/avd_star_filled"
+                                android:drawableTint="@color/secondary_text"
+                                android:drawablePadding="@dimen/padding_small"
+                                android:layout_marginEnd="@dimen/activity_margin_small"
+                                style="@style/Base.TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/secondary_text"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/title"
+                                android:layout_marginRight="@dimen/activity_margin_small"
+                                tools:text="4.5"/>
+
+                        <TextView
+                                android:id="@+id/timing_tv"
+                                style="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/secondary_text"
+                                android:fontFamily="@font/montserrat_light"
+                                android:layout_marginTop="@dimen/activity_margin_mid"
+                                android:gravity="start|center_vertical"
+                                android:text="@{restaurant.timings}"
+                                android:drawableLeft="@drawable/avd_time"
+                                android:drawableTint="@color/secondary_text"
+                                android:drawablePadding="@dimen/padding_small"
+                                app:layout_constraintStart_toStartOf="@id/title"
+                                app:layout_constraintTop_toBottomOf="@id/title"
+                                app:layout_constraintEnd_toStartOf="@id/for_two_tv"
+                                app:layout_constraintHorizontal_chainStyle="spread"
+                                android:layout_marginBottom="@dimen/activity_margin_small"
+                                android:layout_marginRight="@dimen/activity_margin_small"
+                                android:layout_marginStart="@dimen/activity_vertical_margin"
+                                android:layout_marginEnd="@dimen/activity_margin_small"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                tools:text="11 AM - 11 PM" android:layout_marginLeft="@dimen/activity_vertical_margin"/>
+
+                        <TextView
+                                android:id="@+id/for_two_tv"
+                                style="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/secondary_text"
+                                android:fontFamily="@font/montserrat_light"
+                                android:gravity="start|center_vertical"
+                                android:text='@{restaurant.currency + " " + restaurant.averageCostForTwo}'
+                                android:drawableLeft="@drawable/avd_people_outline"
+                                android:drawableTint="@color/secondary_text"
+                                android:drawablePadding="@dimen/padding_small"
+                                app:layout_constraintStart_toEndOf="@id/timing_tv"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/timing_tv"
+                                android:layout_marginBottom="@dimen/activity_margin_small"
+                                android:layout_marginRight="@dimen/activity_margin_small"
+                                android:layout_marginEnd="@dimen/activity_margin_small"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                tools:text="Rs. 400"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                        android:id="@+id/cuisines_tv"
+                        style="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary_text"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/cuisines"
+                        android:drawableLeft="@drawable/avd_format_list_bullet"
+                        android:drawableTint="@color/secondary_text"
+                        android:drawablePadding="@dimen/padding_small"
+                        app:layout_constraintStart_toStartOf="@+id/container_header"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/container_header"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        app:layout_constraintHorizontal_bias="0"
+                        android:layout_marginRight="@dimen/activity_margin_small"
+                        tools:text="@string/cuisines"/>
+
+                <HorizontalScrollView
+                        android:id="@+id/cuisines_scroll"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        app:layout_constraintTop_toBottomOf="@id/cuisines_tv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/activity_margin_small"
+                        android:paddingTop="@dimen/padding_mid"
+                        android:paddingBottom="@dimen/padding_mid"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/category_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:singleLine="true"
+                            app:singleSelection="false"
+                            android:clipToPadding="false"
+                            android:clickable="false"
+                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            app:chipList="@{restaurant.cuisines}"/>
+
+                    <!--android:checkedButton="@={viewModel.checkedBtnObs}"-->
+
+                </HorizontalScrollView>
+
+                <TextView
+                        android:id="@+id/photo_tv"
+                        style="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary_text"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/pictures"
+                        android:drawableLeft="@drawable/avd_photo"
+                        android:drawableTint="@color/secondary_text"
+                        android:drawablePadding="@dimen/padding_small"
+                        app:layout_constraintStart_toStartOf="@+id/container_header"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cuisines_scroll"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        app:layout_constraintHorizontal_bias="0"
+                        android:layout_marginRight="@dimen/activity_margin_small"
+                        tools:text="@string/pictures"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/photo_recyclerView"
+                        android:nestedScrollingEnabled="false"
+                        android:clipToPadding="false"
+                        android:padding="@dimen/padding_small"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        app:layout_constraintVertical_bias="0"
+                        app:layout_constraintTop_toBottomOf="@id/photo_tv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:listitem="@layout/list_item_restaurant_photo"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

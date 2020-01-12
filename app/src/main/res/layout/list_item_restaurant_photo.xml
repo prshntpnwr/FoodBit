@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+                name="photo"
+                type="com.example.foodBit.database.Photo"/>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius_mid"
+            android:layout_margin="@dimen/activity_margin_small"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground">
+
+        <ImageView
+                android:id="@+id/restaurant_photo_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:minWidth="@dimen/poster_mid_width"
+                android:minHeight="@dimen/poster_mid_height"
+                android:layout_gravity="center"
+                app:imageUrl="@{photo.thumbUrl}"/>
+
+        <TextView
+                android:id="@+id/friendly_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="3 days ago"
+                android:text="@{photo.friendlyTime}"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:shadowColor="@color/translucent"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:layout_margin="@dimen/activity_margin_small"
+                android:layout_gravity="end|bottom"
+                style="@style/Base.TextAppearance.AppCompat.Caption"
+                android:textColor="@android:color/white" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
