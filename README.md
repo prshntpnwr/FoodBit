@@ -7,7 +7,7 @@ API KEY can be found in "WebServiceProvider" class under "util" package.
 
 <img width="40%" src="/art/list_fragment.png" /> <img width="40%" src="/art/detail_fragment.png" />
 
-## Used Libraries:
+## Libraries:
 - Kotlin as main development language
 - MVVM as architecture component
 - Room for data persistence
